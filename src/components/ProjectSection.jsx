@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   FaReact,
@@ -28,11 +28,12 @@ export default function ProjectSection() {
   const leftIcons = [FaReact, FaHtml5, FaCss3Alt, FaJs, FaPython];
   const rightIcons = [FaNodeJs, FaPython, FaJs, FaReact, FaHtml5];
   const duration = 8; // durasi loop (detik)
+  const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <div className="flex flex-row text-white py-10 p-20 bg-[#1A1A1D] gap-8">
       {/* KIRI */}
-      <div className="w-1/2 flex flex-col sticky h-fit self-start top-5">
+      <div className="w-1/2 flex flex-col sticky h-fit self-start top-25">
         {/* Section Title */}
         <h1 className="text-4xl font-bold mb-2 text-white">
           Featured Projects
@@ -101,11 +102,31 @@ export default function ProjectSection() {
       {/* KANAN */}
       <div className="w-1/2">
         <div className="text-white flex flex-col gap-2 rounded-lg">
-          <ProjectCard />
+          <ProjectCard onClick={() => setSelectedProject("Project 1")} />
           <ProjectCard />
           <ProjectCard />
         </div>
       </div>
+
+      {/* Modal */}
+      {selectedProject && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <div className="bg-[#1A1A1D] text-white p-8 border border-white/30 shadow-lg w-[500px] relative">
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="absolute top-3 right-4 text-white/60 hover:text-white text-2xl"
+            >
+              &times;
+            </button>
+            <h2 className="text-2xl font-bold mb-4">{selectedProject}</h2>
+            <p className="text-white/70 leading-relaxed">
+              Ini adalah deskripsi lengkap dari {selectedProject}. Kamu bisa isi
+              dengan detail project, teknologi yang digunakan, dan link ke demo
+              atau repo.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
