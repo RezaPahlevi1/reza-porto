@@ -24,7 +24,7 @@ const IconItem = ({ Icon, size = 36, className = "" }) => {
   return <Icon size={size} className={className} />;
 };
 
-export default function ProjectSection() {
+export default function ProjectSection({ projects }) {
   const leftIcons = [FaReact, FaHtml5, FaCss3Alt, FaJs, FaPython];
   const rightIcons = [FaNodeJs, FaPython, FaJs, FaReact, FaHtml5];
   const duration = 8; // durasi loop (detik)
@@ -45,8 +45,7 @@ export default function ProjectSection() {
         {/* Sub Section: Tech Stack */}
         <h2 className="text-2xl font-semibold mb-3 text-white">Tech Stacks</h2>
         <p className="text-white/60 mb-6 text-sm w-3/4 leading-relaxed">
-          Beberapa tools & framework utama yang gua pakai dalam membangun
-          aplikasi web:
+          A few of my expertises.
         </p>
 
         {/* Scrolling icons */}
@@ -102,22 +101,32 @@ export default function ProjectSection() {
       {/* KANAN */}
       <div className="w-1/2">
         <div className="text-white flex flex-col gap-2 rounded-lg">
-          <ProjectCard onClick={() => setSelectedProject("Project 1")} />
-          <ProjectCard />
-          <ProjectCard />
+          {/* <ProjectCard onClick={() => setSelectedProject("Project 1")} /> */}
+          {projects.map((p) => (
+            <ProjectCard
+              key={p.id}
+              project={p}
+              onClick={() => setSelectedProject("Project 1")}
+            />
+          ))}
         </div>
       </div>
 
       {/* Modal */}
       {selectedProject && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-[#1A1A1D] text-white p-8 border border-white/30 shadow-lg w-[500px] relative">
+          <div className="bg-[#1A1A1D] text-white flex flex-col gap-2 p-8 border border-white/30 shadow-lg w-[500px] relative">
             <button
               onClick={() => setSelectedProject(null)}
               className="absolute top-3 right-4 text-white/60 hover:text-white text-2xl"
             >
               &times;
             </button>
+            <img
+              src="https://res.cloudinary.com/hudha/image/upload/v1759909392/ChatGPT_Image_Oct_8_2025_03_42_58_PM_bt7pto.png"
+              alt="project.jpg"
+              className="w-full h-full object-cover border border-white/10"
+            />
             <h2 className="text-2xl font-bold mb-4">{selectedProject}</h2>
             <p className="text-white/70 leading-relaxed">
               Ini adalah deskripsi lengkap dari {selectedProject}. Kamu bisa isi

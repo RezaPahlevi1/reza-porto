@@ -1,40 +1,50 @@
 import TechStacks from "./TechStacks";
 
-function ProjectCard({ onClick }) {
+function ProjectCard({ onClick, project }) {
   return (
     <div
       onClick={onClick}
       className="border border-white/20 p-3 flex flex-col cursor-pointer hover:border-white/70 transition"
     >
-      {/* Thumbnail */}
       <div className="relative w-full h-40 overflow-hidden rounded-md">
         <img
-          src="https://res.cloudinary.com/hudha/image/upload/v1759909392/ChatGPT_Image_Oct_8_2025_03_42_58_PM_bt7pto.png"
+          src={project.image}
           alt="project.jpg"
           className="w-full h-full object-cover border transition-all duration-300 hover:scale-110 border-white/10"
         />
       </div>
 
-      {/* Text content */}
       <div className="flex flex-col flex-grow mt-3 space-y-1 text-white">
-        <h1 className="text-lg font-semibold">Project Name</h1>
+        <h1 className="text-lg font-semibold">{project.name}</h1>
 
         <p className="text-sm text-white/70 line-clamp-2">
-          Project Desc Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Project Desc Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Project Desc Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          {project.description}
         </p>
 
-        <div className="flex pt-1 gap-2 flex-row">
-          <TechStacks />
-          <TechStacks />
+        <div className="flex pt-2 gap-2 flex-row">
+          {/* <TechStacks />
+          <TechStacks /> */}
+          {project.techStacks?.map((tech, i) => (
+            <TechStacks key={`${project.id}-tech-${i}`} tech={tech} />
+          ))}
         </div>
       </div>
 
-      {/* Footer */}
       <div className="flex flex-row justify-between pt-4 text-sm font-medium text-white/80">
-        <p className="hover:text-white transition">Source</p>
-        <p className="hover:text-white transition">Demo</p>
+        <a
+          target="_blank"
+          href={project.github}
+          className="hover:text-white transition"
+        >
+          Source
+        </a>
+        <a
+          target="_blank"
+          href={project.demo}
+          className="hover:text-white transition"
+        >
+          Demo
+        </a>
       </div>
     </div>
   );
