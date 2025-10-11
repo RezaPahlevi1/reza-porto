@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
 import {
   FaReact,
   FaNodeJs,
@@ -10,39 +9,29 @@ import {
 } from "react-icons/fa";
 import ProjectCard from "./ProjectCard";
 import TechStacks from "./TechStacks";
-
-const IconItem = ({ Icon, size = 36, className = "" }) => {
-  if (!Icon) {
-    return (
-      <div
-        style={{ width: size, height: size }}
-        className={`flex items-center justify-center ${className}`}
-      >
-        ?
-      </div>
-    );
-  }
-  return <Icon size={size} className={className} />;
-};
+import { motion, AnimatePresence } from "framer-motion";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 export default function ProjectSection({ projects }) {
-  const leftIcons = [FaReact, FaHtml5, FaCss3Alt, FaJs];
-  const rightIcons = [FaNodeJs, FaJs, FaReact];
-  const duration = 8; // durasi loop (detik)
   const [selectedProject, setSelectedProject] = useState(null);
+  useEffect(() => {
+    Aos.init({ duration: 800, once: true }); // durasi animasi 0.8 detik
+  }, []);
 
   return (
-    <div className="flex flex-row text-white py-10 p-20 bg-[#1A1A1D] gap-8">
-      <div className="w-1/2 flex flex-col sticky h-fit self-start top-25">
+    <div className="flex flex-col lg:flex-row text-white py-10 px-10 lg:p-20 bg-[#1A1A1D] gap-8">
+      {/* LEFT SECTION */}
+      <div className="lg:w-1/2 w-full flex flex-col lg:sticky lg:top-24 h-fit self-start">
         <div className="w-10 h-[2px] bg-sky-500 rounded-full mb-4"></div>
-        <h1 className="text-4xl font-bold mb-2 text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-white">
           Featured Projects
         </h1>
-        <p className="text-white/60 mb-8 w-3/4 leading-relaxed text-sm">
+        <p className="text-white/60 mb-8 lg:w-3/4 leading-relaxed text-sm sm:text-base">
           A selection of my website projects
         </p>
 
-        <div className="flex items-center gap-6 text-sm text-white/70 mb-4">
+        <div className="flex items-center justify-between sm:justify-start sm:gap-10 text-sm text-white/70 mb-4 flex-wrap gap-y-4">
           <div>
             <p className="text-xl font-semibold text-white">3+</p>
             <p>Years Experience</p>
@@ -60,55 +49,11 @@ export default function ProjectSection({ projects }) {
         >
           View my GitHub →
         </a>
-
-        {/* 
-        <div className="flex gap-10 overflow-hidden h-40 items-center">
-          <motion.div
-            className="flex flex-col gap-6"
-            animate={{ y: ["0%", "-50%"] }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "loop",
-              duration,
-              ease: "linear",
-            }}
-          >
-            {[...leftIcons, ...leftIcons].map((IconComp, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <IconItem
-                  Icon={IconComp}
-                  size={36}
-                  className="text-[#61dafb]"
-                />
-              </div>
-            ))}
-          </motion.div>
-
-          <motion.div
-            className="flex flex-col gap-6"
-            animate={{ y: ["-50%", "0%"] }}
-            transition={{
-              repeat: Infinity,
-              repeatType: "loop",
-              duration,
-              ease: "linear",
-            }}
-          >
-            {[...rightIcons, ...rightIcons].map((IconComp, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <IconItem
-                  Icon={IconComp}
-                  size={36}
-                  className="text-yellow-400"
-                />
-              </div>
-            ))}
-          </motion.div>
-        </div> */}
       </div>
 
-      <div className="w-1/2">
-        <div className="text-white flex flex-col gap-2 rounded-lg">
+      {/* RIGHT SECTION */}
+      <div className="lg:w-1/2 w-full">
+        <div className="text-white flex flex-col gap-4 rounded-xs">
           {projects.map((p) => (
             <ProjectCard
               key={p.id}
@@ -119,56 +64,73 @@ export default function ProjectSection({ projects }) {
         </div>
       </div>
 
-      {selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
-          <div className="bg-[#1A1A1D] text-white flex flex-col gap-2 p-8 border border-white/30 shadow-lg w-[700px] relative">
-            <button
-              onClick={() => setSelectedProject(null)}
-              className="absolute top-3 right-4 text-white/60 hover:text-white text-2xl cursor-pointer"
+      {/* MODAL */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              className="bg-[#1A1A1D] text-white flex flex-col gap-3 p-6 sm:p-8 border border-white/30 shadow-lg w-full max-w-[700px] relative rounded-lg"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              &times;
-            </button>
-            <img
-              src={selectedProject.image}
-              alt="project.jpg"
-              className="w-full h-full object-cover border border-white/10"
-            />
-
-            <h2 className="text-2xl font-bold mb-4">{selectedProject.name}</h2>
-
-            <div className="flex flex-row gap-2">
-              {" "}
-              {selectedProject.techStacks?.map((tech, i) => (
-                <TechStacks
-                  key={`${selectedProject.id}-tech-${i}`}
-                  tech={tech}
-                />
-              ))}{" "}
-            </div>
-
-            <p className="text-white/70 leading-relaxed">
-              {selectedProject.description}.
-            </p>
-
-            <div className="flex flex-row justify-between pt-4 text-sm font-medium text-white/80">
-              <a
-                target="_blank"
-                href={selectedProject.github}
-                className="hover:text-white transition"
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-3 right-4 text-white/60 hover:text-white text-2xl cursor-pointer"
               >
-                Source
-              </a>
-              <a
-                target="_blank"
-                href={selectedProject.demo}
-                className="hover:text-white transition"
-              >
-                Demo
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
+                &times;
+              </button>
+
+              <img
+                src={selectedProject.image}
+                alt="project.jpg"
+                className="w-full h-56 sm:h-72 object-cover border border-white/10 rounded-md"
+              />
+
+              <h2 className="text-xl sm:text-2xl font-bold mt-4 mb-2">
+                {selectedProject.name}
+              </h2>
+
+              <div className="flex flex-wrap gap-2">
+                {selectedProject.techStacks?.map((tech, i) => (
+                  <TechStacks
+                    key={`${selectedProject.id}-tech-${i}`}
+                    tech={tech}
+                  />
+                ))}
+              </div>
+
+              <p className="text-white/70 leading-relaxed text-sm sm:text-base">
+                {selectedProject.description}.
+              </p>
+
+              <div className="flex flex-row justify-between pt-4 text-sm font-medium text-white/80">
+                <a
+                  target="_blank"
+                  href={selectedProject.github}
+                  className="hover:text-white transition"
+                >
+                  Source
+                </a>
+                <a
+                  target="_blank"
+                  href={selectedProject.demo}
+                  className="hover:text-white transition"
+                >
+                  Demo
+                </a>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

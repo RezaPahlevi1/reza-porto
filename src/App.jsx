@@ -6,6 +6,7 @@ import ProjectSection from "./components/ProjectSection";
 import TechSection from "./components/TechSection";
 import FormSection from "./components/FormSection";
 import authImage from "./assets/auth-management.png";
+import Splitlicious from "./assets/splitlicious.png";
 import EducationSection from "./components/EducationSection";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
       techStacks: ["React Vite", "TailwindCSS", "Javascript"],
       description:
         "A simple split bill web app that lets you add friends and quickly calculate shared expenses",
-      image: "",
+      image: Splitlicious,
       github: "https://github.com/RezaPahlevi1/splitlicious",
       demo: "",
     },

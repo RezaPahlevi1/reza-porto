@@ -48,27 +48,31 @@ function TechSection() {
   ];
 
   return (
-    <div className="bg-[#1A1A1D] text-white py-10 p-20 flex flex-row">
-      <div className="w-1/2 sticky h-fit self-start top-25">
+    <div className="bg-[#1A1A1D] text-white py-10 px-10 lg:px-20 flex flex-col lg:flex-row gap-10 lg:gap-20">
+      {/* BAGIAN KIRI */}
+      <div className="w-full lg:w-1/2 lg:sticky lg:top-24 h-fit self-start">
         <div className="w-10 h-[2px] bg-sky-500 rounded-full mb-4"></div>
-        <h1 className="text-3xl font-bold mb-2 tracking-wide">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 tracking-wide">
           Tools & Technologies.
         </h1>
-        <p className="text-white/60 mb-6 w-3/4 leading-relaxed text-sm">
+        <p className="text-white/60 mb-6  leading-relaxed text-sm sm:text-base">
           A selection of tools & technologies that I work with to build modern
           and efficient web applications.
         </p>
       </div>
 
-      <div className="w-1/2">
-        <div className="grid grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 gap-8">
+      {/* BAGIAN KANAN */}
+      <div className="w-full lg:w-1/2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 sm:gap-6 md:gap-8">
           {techs.map((tech, i) => (
             <div
               key={i}
-              className="flex flex-col items-center gap-3 bg-[#262a2a] p-6 border rounded-lg border-white/20 hover:border-white/80 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+              className="flex flex-col items-center gap-3 bg-[#262a2a] p-4 sm:p-5 border rounded-lg border-white/20 hover:border-white/80 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
-              <div className="text-5xl">{tech.icon}</div>
-              <p className="text-sm text-gray-300 font-medium">{tech.name}</p>
+              <div className="text-4xl sm:text-5xl">{tech.icon}</div>
+              <p className="text-xs sm:text-sm text-gray-300 font-medium">
+                {tech.name}
+              </p>
             </div>
           ))}
         </div>
