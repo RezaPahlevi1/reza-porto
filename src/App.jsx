@@ -6,6 +6,7 @@ import ProjectSection from "./components/ProjectSection";
 import TechSection from "./components/TechSection";
 import FormSection from "./components/FormSection";
 import authImage from "./assets/auth-management.png";
+import EducationSection from "./components/EducationSection";
 
 function App() {
   const projects = [
@@ -21,11 +22,12 @@ function App() {
     },
     {
       id: 2,
-      name: "",
-      techStacks: ["", "", ""],
-      description: "",
+      name: "Splitlicious",
+      techStacks: ["React Vite", "TailwindCSS", "Javascript"],
+      description:
+        "A simple split bill web app that lets you add friends and quickly calculate shared expenses",
       image: "",
-      github: "",
+      github: "https://github.com/RezaPahlevi1/splitlicious",
       demo: "",
     },
     {
@@ -44,7 +46,8 @@ function App() {
         <Navbar />
         <MainSection />
         <ProjectSection projects={projects} />
-        {/* <TechSection /> */}
+        <TechSection />
+        <EducationSection />
         <FormSection />
       </div>
     </>

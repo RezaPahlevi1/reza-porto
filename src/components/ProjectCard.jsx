@@ -4,7 +4,7 @@ function ProjectCard({ onClick, project }) {
   return (
     <div
       onClick={onClick}
-      className="border border-white/20 p-3 flex flex-col cursor-pointer hover:border-white/70 transition"
+      className="border border-white/20 p-3 flex flex-col rounded-lg cursor-pointer hover:border-white/70 transition"
     >
       <div className="relative w-full h-40 overflow-hidden rounded-md">
         <img
