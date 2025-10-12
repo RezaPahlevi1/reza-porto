@@ -33,7 +33,7 @@ function ProjectCard({ onClick, project }) {
           {project.description}
         </p>
 
-        <div className="flex pt-2 gap-2 flex-row">
+        <div className="flex flex-wrap pt-2 gap-2">
           {project.techStacks?.map((tech, i) => (
             <TechStacks key={`${project.id}-tech-${i}`} tech={tech} />
           ))}
