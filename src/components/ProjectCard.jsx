@@ -14,16 +14,26 @@ function ProjectCard({ onClick, project }) {
         />
       </div>
 
-      <div className="flex flex-col flex-grow mt-3 space-y-1 text-white">
-        <h1 className="text-lg font-semibold">{project.name}</h1>
+      <div className="flex flex-col flex-grow mt-3 p-1 space-y-1 text-white">
+        <div className="flex flex-row justify-between items-center">
+          <h1 className="text-lg font-semibold">{project.name}</h1>
+          <h1
+            className={`text-xs sm:text-sm font-medium px-3 py-1 rounded-full capitalize
+      ${
+        project.status === "completed"
+          ? "bg-green-500/20 text-green-400 border border-green-500/30"
+          : "bg-red-500/20 text-red-400 border border-red-500/30"
+      }`}
+          >
+            {project.status}
+          </h1>
+        </div>
 
         <p className="text-sm text-white/70 line-clamp-2">
           {project.description}
         </p>
 
         <div className="flex pt-2 gap-2 flex-row">
-          {/* <TechStacks />
-          <TechStacks /> */}
           {project.techStacks?.map((tech, i) => (
             <TechStacks key={`${project.id}-tech-${i}`} tech={tech} />
           ))}

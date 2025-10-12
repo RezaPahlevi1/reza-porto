@@ -3,6 +3,25 @@ import { FaInstagram } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 function FormSection() {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+
+    const res = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { Accept: "application/json" },
+    });
+
+    if (res.ok) {
+      alert("Message sent successfully!");
+      form.reset();
+    } else {
+      alert("Oops! Something went wrong.");
+    }
+  };
+
   return (
     <div className="py-10 px-10 md:px-16 lg:px-20 bg-[#262a2a] flex flex-col lg:flex-row justify-between gap-10">
       {/* Kiri - Sosial Media */}
@@ -53,21 +72,31 @@ function FormSection() {
         <h1 className="text-white text-3xl md:text-4xl font-bold">
           Send Me a Message.
         </h1>
-        <form className="flex flex-col gap-5">
+        <form
+          action="https://formspree.io/f/mjkaankl"
+          method="POST"
+          className="flex flex-col gap-5"
+        >
           <input
+            type="text"
+            name="name"
             className="bg-[#1A1A1D] text-white w-full p-3 border border-white/30 rounded-lg focus:border-sky-500 outline-none transition-all"
             placeholder="Your Name."
           />
           <input
+            type="email"
+            name="email"
             className="bg-[#1A1A1D] text-white w-full p-3 border border-white/30 rounded-lg focus:border-sky-500 outline-none transition-all"
             placeholder="Your Email."
           />
           <textarea
+            name="message"
             className="bg-[#1A1A1D] text-white w-full p-3 border border-white/30 rounded-lg focus:border-sky-500 outline-none transition-all"
             placeholder="Your Message."
             rows="5"
           />
           <button
+            onSubmit={handleSubmit}
             type="submit"
             className="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg w-fit transition-all"
           >

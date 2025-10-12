@@ -2,7 +2,10 @@ function EducationSection() {
   return (
     <div className="bg-[#1A1A1D] text-white py-10 px-10 lg:px-20 flex flex-col lg:flex-row gap-10 lg:gap-20">
       {/* Kiri - Detail Waktu & GPA */}
-      <div className="w-full lg:w-1/2 lg:sticky lg:top-24 h-fit self-start">
+      <div
+        id="education"
+        className="w-full lg:w-1/2 lg:sticky lg:top-24 h-fit self-start"
+      >
         <div className="w-10 h-[2px] bg-sky-500 rounded-full mb-4"></div>
         <h1 className="text-2xl sm:text-3xl font-bold mb-2 tracking-wide">
           Education.

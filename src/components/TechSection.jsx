@@ -8,6 +8,7 @@ import {
   FaJsSquare,
   FaFigma,
   FaGithub,
+  FaWordpressSimple,
 } from "react-icons/fa";
 import {
   SiTailwindcss,
@@ -45,10 +46,14 @@ function TechSection() {
     { name: "Git", icon: <FaGitAlt className="text-red-500" /> },
     { name: "Figma", icon: <FaFigma className="text-pink-500" /> },
     { name: "Github", icon: <FaGithub className="text-white" /> },
+    { name: "Wordpress", icon: <FaWordpressSimple className="text-white" /> },
   ];
 
   return (
-    <div className="bg-[#1A1A1D] text-white py-10 px-10 lg:px-20 flex flex-col lg:flex-row gap-10 lg:gap-20">
+    <div
+      id="techstacks"
+      className="bg-[#1A1A1D] text-white py-10 px-10 lg:px-20 flex flex-col lg:flex-row gap-10 lg:gap-20"
+    >
       {/* BAGIAN KIRI */}
       <div className="w-full lg:w-1/2 lg:sticky lg:top-24 h-fit self-start">
         <div className="w-10 h-[2px] bg-sky-500 rounded-full mb-4"></div>

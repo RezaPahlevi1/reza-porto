@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FaReact,
   FaNodeJs,
@@ -9,18 +9,24 @@ import {
 } from "react-icons/fa";
 import ProjectCard from "./ProjectCard";
 import TechStacks from "./TechStacks";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
 export default function ProjectSection({ projects }) {
   const [selectedProject, setSelectedProject] = useState(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    amount: 0.1, // 30% bagian card masuk viewport baru trigger animasi
+  });
   useEffect(() => {
-    Aos.init({ duration: 800, once: true }); // durasi animasi 0.8 detik
+    Aos.init({ duration: 200, once: true }); // durasi animasi 0.8 detik
   }, []);
-
   return (
-    <div className="flex flex-col lg:flex-row text-white py-10 px-10 lg:p-20 bg-[#1A1A1D] gap-8">
+    <div
+      id="projects"
+      className="flex flex-col lg:flex-row text-white py-10 px-10 lg:p-20 bg-[#1A1A1D] gap-8"
+    >
       {/* LEFT SECTION */}
       <div className="lg:w-1/2 w-full flex flex-col lg:sticky lg:top-24 h-fit self-start">
         <div className="w-10 h-[2px] bg-sky-500 rounded-full mb-4"></div>
@@ -33,11 +39,11 @@ export default function ProjectSection({ projects }) {
 
         <div className="flex items-center justify-between sm:justify-start sm:gap-10 text-sm text-white/70 mb-4 flex-wrap gap-y-4">
           <div>
-            <p className="text-xl font-semibold text-white">3+</p>
+            <p className="text-xl font-semibold text-white">2+</p>
             <p>Years Experience</p>
           </div>
           <div>
-            <p className="text-xl font-semibold text-white">15+</p>
+            <p className="text-xl font-semibold text-white">10+</p>
             <p>Projects Built</p>
           </div>
         </div>
@@ -51,20 +57,16 @@ export default function ProjectSection({ projects }) {
         </a>
       </div>
 
-      {/* RIGHT SECTION */}
       <div className="lg:w-1/2 w-full">
         <div className="text-white flex flex-col gap-4 rounded-xs">
-          {projects.map((p) => (
-            <ProjectCard
-              key={p.id}
-              project={p}
-              onClick={() => setSelectedProject(p)}
-            />
-          ))}
+          {projects.map((p) => {
+            return (
+              <ProjectCard project={p} onClick={() => setSelectedProject(p)} />
+            );
+          })}
         </div>
       </div>
 
-      {/* MODAL */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
