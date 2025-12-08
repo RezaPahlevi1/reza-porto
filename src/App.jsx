@@ -9,6 +9,7 @@ import authImage from "./assets/auth-management.png";
 import Splitlicious from "./assets/splitlicious.png";
 import EducationSection from "./components/EducationSection";
 import Bpakm from "./assets/bpakm.png";
+import Weatherapp from "./assets/weather-app.png";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
@@ -57,6 +58,17 @@ function App() {
       image: Bpakm,
       github: "#",
       demo: "https://bpakm.uii.ac.id/",
+      status: "completed",
+    },
+    {
+      id: 5,
+      name: "Weather-app",
+      techStacks: ["React Vite", "TailwindCSS"],
+      description:
+        "A clean and responsive weather application built with React and Tailwind CSS, designed to provide quick and accurate weather information based on user-selected locations. This project serves as practical training for working with APIs, managing state in React, and building modern UI components.",
+      image: Weatherapp,
+      github: "https://github.com/RezaPahlevi1/weather-app",
+      demo: "https://weather-p6llt4w3h-reza-pahlevis-projects-2e72e53c.vercel.app/",
       status: "completed",
     },
   ];
