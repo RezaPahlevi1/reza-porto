@@ -10,8 +10,8 @@ import Splitlicious from "./assets/splitlicious.png";
 import EducationSection from "./components/EducationSection";
 import Bpakm from "./assets/bpakm.png";
 import Weatherapp from "./assets/weather-app.png";
+import Fastorder from "./assets/fastorder.png";
 
-import Aos from "aos";
 import "aos/dist/aos.css";
 
 function App() {
@@ -69,6 +69,17 @@ function App() {
       image: Weatherapp,
       github: "https://github.com/RezaPahlevi1/weather-app",
       demo: "https://weather-p6llt4w3h-reza-pahlevis-projects-2e72e53c.vercel.app/",
+      status: "completed",
+    },
+    {
+      id: 6,
+      name: "Fast-order",
+      techStacks: ["React Vite", "TailwindCSS", "React Redux"],
+      description:
+        "This project is a web-based pizza ordering application built using React, React Router, and Redux to manage the ordering flow in a structured and scalable way. It allows users to browse the menu, add items to the cart, place orders, and track order status in real time, with a focus on clean architecture, predictable state management, and smooth client-side navigation.",
+      image: Fastorder,
+      github: "https://github.com/RezaPahlevi1/fast-order",
+      demo: "https://fast-order-one.vercel.app/",
       status: "completed",
     },
   ];

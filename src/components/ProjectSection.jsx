@@ -77,57 +77,63 @@ export default function ProjectSection({ projects }) {
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="bg-[#1A1A1D] text-white flex flex-col gap-3 p-6 sm:p-8 border border-white/30 shadow-lg w-full max-w-[700px] relative rounded-lg"
+              className="relative flex max-h-[90vh] w-full max-w-[700px] flex-col overflow-hidden rounded-lg border border-white/30 bg-[#1A1A1D] p-6 text-white shadow-lg sm:p-8"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.97 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
+              {/* Close */}
               <button
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-3 right-4 text-white/60 hover:text-white text-2xl cursor-pointer"
+                className="absolute top-3 right-4 z-10 text-2xl text-white/60 hover:text-white transition"
               >
                 &times;
               </button>
 
-              <img
-                src={selectedProject.image}
-                alt="project.jpg"
-                className="w-full h-56 sm:h-72 object-cover border border-white/10 rounded-md"
-              />
+              {/* Scrollable content */}
+              <div className="flex flex-1 min-h-0 flex-col gap-3 overflow-y-auto pr-1">
+                <img
+                  src={selectedProject.image}
+                  alt="project"
+                  className="h-56 w-full rounded-md border border-white/10 object-cover sm:h-72"
+                />
 
-              <h2 className="text-xl sm:text-2xl font-bold mt-4 mb-2">
-                {selectedProject.name}
-              </h2>
+                <h2 className="mt-4 mb-2 text-xl font-bold sm:text-2xl">
+                  {selectedProject.name}
+                </h2>
 
-              <div className="flex flex-wrap gap-2">
-                {selectedProject.techStacks?.map((tech, i) => (
-                  <TechStacks
-                    key={`${selectedProject.id}-tech-${i}`}
-                    tech={tech}
-                  />
-                ))}
-              </div>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.techStacks?.map((tech, i) => (
+                    <TechStacks
+                      key={`${selectedProject.id}-tech-${i}`}
+                      tech={tech}
+                    />
+                  ))}
+                </div>
 
-              <p className="text-white/70 leading-relaxed text-sm sm:text-base">
-                {selectedProject.description}.
-              </p>
+                <p className="text-sm leading-relaxed text-white/70 sm:text-base">
+                  {selectedProject.description}
+                </p>
 
-              <div className="flex flex-row justify-between pt-4 text-sm font-medium text-white/80">
-                <a
-                  target="_blank"
-                  href={selectedProject.github}
-                  className="hover:text-white transition"
-                >
-                  Source
-                </a>
-                <a
-                  target="_blank"
-                  href={selectedProject.demo}
-                  className="hover:text-white transition"
-                >
-                  Demo
-                </a>
+                <div className="flex justify-between pt-4 text-sm font-medium text-white/80">
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition hover:text-white"
+                  >
+                    Source
+                  </a>
+                  <a
+                    href={selectedProject.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition hover:text-white"
+                  >
+                    Demo
+                  </a>
+                </div>
               </div>
             </motion.div>
           </motion.div>
